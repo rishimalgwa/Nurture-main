@@ -1,12 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Feedback</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/nurturepopper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/style-mobile.css" media="screen and (orientation: portrait)">
 </head>
+
 <body>
-    <h1>HELLLO WORLDDD</h1>
+  <div style="text-align: center; font-size:20px; padding: 50dp; background-color: white;" class="book-appoint">
+    <h1>We appreciate your feedback!</h1><br>
+    <div>
+      <form ng-app="myApp" ng-controller="validateCtrl" name="myForm" novalidate>
+        <p>Your Name (required):<br>
+          <input type="text" name="user" ng-model="user" required><br>
+          <span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+            <span ng-show="myForm.user.$error.required">Name is required.</span> </span>
+        </p>
+        <p>Contact Number (required):<br>
+          <input type="text" ng-model="mobile_number" name="mobile_number" ng-pattern="/^([+]\d{2})?[6789]{1}\d{9}$/"><br>
+          <span style="color:red" ng-show="myForm.mobile_number.$dirty && myForm.mobile_number.$invalid">
+            <span ng-show="myForm.mobile_number.$error.required">Contact number is required.</span> 
+            <span style="color:red" ng-show="myForm.mobile_number.$error.pattern">Please enter valid number.</span></span>
+        </p>
+        <p>Email (required):<br>
+          <input type="email" name="email" ng-model="email" required><br>
+          <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+            <span ng-show="myForm.email.$error.required">Email is required.</span>
+            <span ng-show="myForm.email.$error.email">Invalid email address.</span> </span>
+        </p>
+        <p>Your Experience:<br>
+          <input type="radio" value="one" name="rating" required #rating="ngModel"> 1
+          <input type="radio" value="two" name="rating" required #rating="ngModel"> 2
+          <input type="radio" value="three" name="rating" required #rating="ngModel"> 3
+          <input type="radio" value="four" name="rating" required #rating="ngModel"> 4
+          <input type="radio" value="five" name="rating" required #rating="ngModel"> 5<br>
+          <span style="color:red" ng-show="myForm.rating.$invalid">
+            <span ng-show="myForm.rating.$error.required">Rating is required.</span> </span>
+        </p>
+        <p>Comments:<br>
+          <textarea name="comments" rows="4" cols="50"></textarea>
+        </p>
+        <a href="/"><input type="submit" ng-disabled="myForm.user.$invalid || myForm.rating.$invalid || myForm.email.$dirty && myForm.email.$invalid  || myForm.mobile_number.$dirty && myForm.mobile_number.$invalid"></a> </p>
+      </form>
+
+    </div>
+    <script src="/static/javascript/index.js"></script>
+  </div>
+
+  <div class="footer">
+    <div class="footer-content">
+      <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/">About Us</a></li>
+        <li><a href="/">Services</a></li>
+        <li><a href="/">Health Calculators</a></li>
+        <li><a href="/">Health Tips</a></li>
+        <li><a href="/">FAQ</a></li>
+      </ul>
+      <img src="/static/images/leaves.png" alt="" class="leaves">
+      <img src="/static/images/logo.png" alt="" class="nurture" onclick="window.location.href='/'">
+    </div>
+  </div>
+
+  <script>
+    var app = angular.module('myApp', []);
+    app.controller('validateCtrl', function ($scope) {
+      $scope.user = ''; $scope.email = ''; $scope.mobile_number = ""; $scope.website = ""; $scope.card = ""; $scope.dob = "";
+    });
+  </script>
+
 </body>
+
 </html>
